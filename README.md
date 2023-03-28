@@ -1,5 +1,5 @@
 # Ranking Restaurant Services using Cluster Analysis of Yelp Dataset
-## Members
+## MEMBERS
   Hanhui Song (hanhuis2@illinois.edu) MCS student Department of Computer Science </br>
   Mingyi Lai (mingyi4@illinois.edu) MS student Department of Industrial and System Engineering</br>
   Shun-Hsiang Hsu (hsus2@illinois.edu) Ph.D. student Department of Civil and Environmental Engineering

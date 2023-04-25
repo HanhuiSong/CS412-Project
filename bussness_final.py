@@ -5,6 +5,7 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import plotly.express as px
 from sklearn.ensemble import RandomForestClassifier
+from sklearn import preprocessing as pp
 
 active_user_df = pd.read_json("./rev_Yelp/yelp_academic_dataset_user.json").reset_index(drop=True)
 restaurant_df = pd.read_json("./rev_Yelp/yelp_academic_dataset_business.json").reset_index(drop=True)
@@ -104,7 +105,7 @@ restaurant_score_df = restaurant_score_df.join(review_restaurant_df.set_index('b
 
 # apply weight method
 def my_combine_function(arr):
-    return arr[0] + arr[1] * 0.25 + arr[2] * 0.25 + arr[3] * 0.5
+    return (arr[1] * 0.25) + (arr[2] * 0.25) + (arr[3] * 0.5)
 
 
 # using addition to get final score
@@ -113,6 +114,8 @@ restaurant_score_df['final_score'] = restaurant_score_df[['stars', 'review_count
 # merge tip and bussiness
 merged_df = pd.merge(restaurant_df, tip_df[['business_id', 'compliment_count']], on='business_id', how='left')
 restaurant_df['compliment_count'] = merged_df['compliment_count']
+restaurant_df = restaurant_df.merge(restaurant_score_df[['business_id', 'stars']], on='business_id', how='left')
+
 
 restaurant_df['compliment_count'] = restaurant_df['compliment_count'].fillna(0)
 
@@ -123,14 +126,16 @@ merged_df1 = pd.merge(restaurant_df, restaurant_score_df[['business_id', 'final_
 restaurant_df['final_score'] = merged_df1['final_score']
 
 # k-means
-columns_to_cluster = ['stars', 'review_count', 'compliment_count','final_score']
+
+columns_to_cluster = ['stars_y', 'review_count', 'compliment_count','final_score']
 imputed_data = restaurant_df[columns_to_cluster].fillna(0)
 min_values = imputed_data[columns_to_cluster].min()
 max_values = imputed_data[columns_to_cluster].max()
 normalized_data = (imputed_data[columns_to_cluster] - min_values) / (max_values - min_values)
+print(max(normalized_data['stars_y']))
 
 #data_to_cluster = restaurant_df[columns_to_cluster]
-kmeans = KMeans(n_clusters=7)
+kmeans = KMeans(n_clusters=20)
 kmeans.fit(normalized_data)
 importances = kmeans.cluster_centers_.mean(axis=0)
 
@@ -139,9 +144,9 @@ df_importances = pd.DataFrame({'feature': columns_to_cluster, 'importance': impo
 # Use px.bar to create a bar chart of the feature importances
 bar_chart = px.bar(df_importances, x='feature', y='importance', title='Feature Importances')
 bar_chart.show()
-restaurant_df['cluster_label'] = kmeans.labels_
+normalized_data['cluster_label'] = kmeans.labels_
 # # Visualize the results using a scatter plot
 #
-scatter_matrix = px.scatter_matrix(restaurant_df, dimensions=columns_to_cluster, color='cluster_label')
+scatter_matrix = px.scatter_matrix(normalized_data, dimensions=columns_to_cluster, color='cluster_label')
 scatter_matrix.show()
 

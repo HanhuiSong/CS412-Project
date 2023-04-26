@@ -1,10 +1,13 @@
 # Ranking Restaurant Services using Cluster Analysis of Yelp Dataset
 
 # Data
-    
+    rev_Yelp
     https://uofi.box.com/s/6y1y9p39env2rhzpnggm47mzvxga3xma
     
     
 # How to run
 
-  Put rev_Yelp and python file under same folder and simply run. The result should contain: 1. Feature impotence graph  2. k-means graph
+To generate the desired output, follow these steps:
+1. Place `rev_Yelp` and `business.py` in the same folder and run the script. The resulting output should include a k-means graph.
+2. Place `rev_Yelp` and `feature.py` in the same folder. Determine which dataframe you need to use and drop any non-numerical features in that dataframe. Then replace all dataframe names in the code. The result output should include a feature importance bar chart.
+

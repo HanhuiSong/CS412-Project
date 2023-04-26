@@ -5,7 +5,7 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import plotly.express as px
 from sklearn.ensemble import RandomForestClassifier
-from sklearn import preprocessing as pp
+
 
 active_user_df = pd.read_json("./rev_Yelp/yelp_academic_dataset_user.json").reset_index(drop=True)
 restaurant_df = pd.read_json("./rev_Yelp/yelp_academic_dataset_business.json").reset_index(drop=True)
@@ -137,13 +137,13 @@ print(max(normalized_data['stars_y']))
 #data_to_cluster = restaurant_df[columns_to_cluster]
 kmeans = KMeans(n_clusters=20)
 kmeans.fit(normalized_data)
-importances = kmeans.cluster_centers_.mean(axis=0)
-
-df_importances = pd.DataFrame({'feature': columns_to_cluster, 'importance': importances})
-
-# Use px.bar to create a bar chart of the feature importances
-bar_chart = px.bar(df_importances, x='feature', y='importance', title='Feature Importances')
-bar_chart.show()
+# importances = kmeans.cluster_centers_.mean(axis=0)
+#
+# df_importances = pd.DataFrame({'feature': columns_to_cluster, 'importance': importances})
+#
+# # Use px.bar to create a bar chart of the feature importances
+# bar_chart = px.bar(df_importances, x='feature', y='importance', title='Feature Importances')
+# bar_chart.show()
 normalized_data['cluster_label'] = kmeans.labels_
 # # Visualize the results using a scatter plot
 #

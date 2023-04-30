@@ -10,7 +10,7 @@
 
 To generate the desired output, follow these steps:
 1. Place `rev_Yelp` and `business.py` in the same folder and run the script. The resulting output should include a k-means graph.
-2. Place `rev_Yelp` and `feature.py` in the same folder. Determine which dataframe you need to use and drop any non-numerical features in that dataframe. Then replace all dataframe names in the code. The result output should include a feature importance bar chart.
+2. Place `rev_Yelp` and `feature_importance.py` in the same folder and simply run. The resulting output should be a feature importance graph contain three sub graphs.
 
 ## MEMBERS
   Hanhui Song (hanhuis2@illinois.edu) MCS student Department of Computer Science </br>

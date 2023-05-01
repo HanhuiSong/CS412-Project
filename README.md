@@ -43,6 +43,10 @@ based on the relationships will be presented. For feasibility,
 our objective and research scope are similar to the previous research
 [1], where K-means and DBSCAN were adopted to infer electricity
 behavior.
+### K-means
+1. Place the data generated from `data_comb.py` in `rev_Yelp`.
+2. Run the `K-means-Final.py`, there are 8 results. From the top to the bottom they are: normal sum data using fill NaN with 0 method, standardized sum data using fill NaN with 0 method, normal time data using fill NaN with 0 method, standardized time data using fill NaN with 0 method, normal sum data using delete NaN data method, standardized sum data using delete NaN data method, normal time data using delete NaN data method, standardized time data using delete NaN data method.
+3. You can set the number of cluster for each results and see how the results change.
 
 ## SCHEDULES
 • Before the midpoint (3/21), data preprocessing and preliminary
